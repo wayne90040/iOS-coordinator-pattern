@@ -8,12 +8,55 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    lazy var toAButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.setTitle("to A View", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = .red
+        button.addTarget(self, action: #selector(didTappedToAButton), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var toBButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.setTitle("to B View", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = .green
+        button.addTarget(self, action: #selector(didTappedToBButton), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = .black
+        view.addSubview(toAButton)
+        toAButton.frame = .init(x: (self.view.width - 100) / 2,
+                                y: (self.view.height - 100) / 2,
+                                width: 100,
+                                height: 100)
+        view.addSubview(toBButton)
+        toBButton.frame = .init(x: toAButton.left,
+                                y: toAButton.botton + 10,
+                                width: 100, height: 100)
     }
-
-
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    @objc private func didTappedToAButton() {
+        let avc = AViewController()
+        avc.modalPresentationStyle = .fullScreen
+        present(avc, animated: true, completion: nil)
+    }
+    
+    @objc private func didTappedToBButton() {
+        let bvc = BViewController()
+        bvc.modalPresentationStyle = .fullScreen
+        present(bvc, animated: true, completion: nil)
+    }
+    
 }
 
