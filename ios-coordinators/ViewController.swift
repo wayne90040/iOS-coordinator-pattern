@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    weak var coordinator: MainCoordinator?
+    
     lazy var toAButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("to A View", for: .normal)
@@ -29,8 +31,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .black
+        view.backgroundColor = .systemBackground
         view.addSubview(toAButton)
         toAButton.frame = .init(x: (self.view.width - 100) / 2,
                                 y: (self.view.height - 100) / 2,
@@ -47,15 +48,11 @@ class ViewController: UIViewController {
     }
     
     @objc private func didTappedToAButton() {
-        let avc = AViewController()
-        avc.modalPresentationStyle = .fullScreen
-        present(avc, animated: true, completion: nil)
+        coordinator?.toA()
     }
     
     @objc private func didTappedToBButton() {
-        let bvc = BViewController()
-        bvc.modalPresentationStyle = .fullScreen
-        present(bvc, animated: true, completion: nil)
+        coordinator?.toB()
     }
     
 }

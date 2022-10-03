@@ -9,6 +9,8 @@ import UIKit
 
 class BViewController: UIViewController {
     
+    weak var coordinator: MainCoordinator?
+    
     lazy var dismissButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("dismiss", for: .normal)
@@ -32,7 +34,7 @@ class BViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     @objc private func didTappedDismiss() {
-        dismiss(animated: true)
+        coordinator?.back()
     }
 
 }

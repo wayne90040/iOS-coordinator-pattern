@@ -9,6 +9,8 @@ import UIKit
 
 class AViewController: UIViewController {
     
+    weak var coordinator: MainCoordinator?
+    
     lazy var toBButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("to B View", for: .normal)
@@ -46,13 +48,10 @@ class AViewController: UIViewController {
     }
     
     @objc private func didTappedToBButton() {
-        let bvc = BViewController()
-        bvc.modalPresentationStyle = .fullScreen
-        present(bvc, animated: true, completion: nil)
+        coordinator?.toB()
     }
     
     @objc private func didTappedDismiss() {
-        dismiss(animated: true)
+        coordinator?.back()
     }
-
 }
